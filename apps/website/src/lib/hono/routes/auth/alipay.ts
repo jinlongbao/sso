@@ -4,7 +4,14 @@ import { callbackOrBindRedirect } from '../../utils/safe-redirect';
 
 const router = new Hono();
 
-router.use('/alipay/*', alipayAuth());
+router.use('/alipay/*', async (c, next) => {
+  const handler = alipayAuth({
+    appId: c.env.ALIPAY_APP_ID,
+    privateKey: c.env.ALIPAY_PRIVATE_KEY,
+    callbackUrl: c.env.ALIPAY_CALLBACK_URL
+  });
+  return handler(c, next);
+});
 router.get('/alipay/*', async (c) => {
   const s = c.get('services');
   let viewer = s.session.get('user');

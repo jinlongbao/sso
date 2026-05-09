@@ -8,3 +8,9 @@ kv_namespaces= [
 d1_databases = [
   { binding = "DB", database_name = "sso", database_id = "5b8d49f4-9296-4c04-99e5-6fc30b426952" }
 ]
+
+[vars]
+GITHUB_ID = "Ov23lieRFLkIkC1yXI7C"
+GITHUB_SECRET = "c91279ee85813238c1d77d196e707849ed493916"
+GITHUB_CALLBACK_URL = "http://127.0.0.1:5173/auth/github"
+SESSION_SECRET = "4dd55f5f164168f133ee77c261c70334f160a43edfd20a51630299f370a5a152"

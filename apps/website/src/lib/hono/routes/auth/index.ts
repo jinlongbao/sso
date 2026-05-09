@@ -8,6 +8,8 @@ import { router as revoke } from './revoke';
 import { router as token } from './token';
 import { router as userinfo } from './userinfo';
 
+
+
 const router = new Hono();
 
 router.route('/', afdian);
@@ -18,5 +20,6 @@ router.route('/', token);
 router.route('/', revoke);
 router.route('/', userinfo);
 router.route('/', logout);
+
 
 export { router as authRouter };

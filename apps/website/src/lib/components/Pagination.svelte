@@ -18,65 +18,85 @@
 
   $effect(() => {
     if (!search.get('size') || !search.get('page')) {
-      search.set('size', '20');
-      search.set('page', '1');
-      goto(`${$page.url.pathname}?${search.toString()}`);
+      const newSearch = new URLSearchParams(search);
+      newSearch.set('size', '20');
+      newSearch.set('page', '1');
+      goto(`${$page.url.pathname}?${newSearch.toString()}`, { replaceState: true });
     }
   });
+
   function handleLink(e: Event) {
-    goto((e.target as HTMLAnchorElement).href);
+    e.preventDefault();
+    const target = e.currentTarget as HTMLAnchorElement;
+    goto(target.href);
   }
+
   function handleSize(e: Event) {
-    search.set('size', (e.target as HTMLSelectElement).value);
-    goto(`${$page.url.pathname}?${search.toString()}`);
+    const target = e.target as HTMLSelectElement;
+    const newSearch = new URLSearchParams(search);
+    newSearch.set('size', target.value);
+    newSearch.set('page', '1'); // Reset to page 1 on size change
+    goto(`${$page.url.pathname}?${newSearch.toString()}`);
   }
 </script>
 
-<div class="flex justify-center my-4">
-  <select
-    on:change={handleSize}
-    class="select select-bordered w-24 max-w-xs mr-2"
-    bind:value={size}>
-    <option value="10">10</option>
-    <option value="20">20</option>
-    <option value="50">50</option>
-    <option value="100">100</option>
-  </select>
-  <div class="join">
+<div class="flex items-center justify-center gap-4 py-8">
+  <div class="flex items-center gap-2">
+    <span class="text-xs text-slate-500 font-medium">Show</span>
+    <select
+      onchange={handleSize}
+      class="glass rounded-xl px-3 py-1.5 text-xs font-bold border-white/5 focus:ring-2 focus:ring-indigo-500/50 outline-none transition-all cursor-pointer appearance-none text-slate-300"
+      bind:value={size}>
+      <option value="10" class="bg-slate-900">10</option>
+      <option value="20" class="bg-slate-900">20</option>
+      <option value="50" class="bg-slate-900">50</option>
+      <option value="100" class="bg-slate-900">100</option>
+    </select>
+  </div>
+
+  <div class="flex items-center gap-1.5 bg-white/5 p-1.5 rounded-2xl border border-white/5 shadow-xl">
+    <!-- First Page -->
     <a
-      on:click|preventDefault={handleLink}
-      class="join-item btn"
-      class:btn-disabled={search.get('page') === '1'}
-      href={`${$linkPrefix}${$page.url.pathname}?${search
-        .toString()
-        .replace(`page=${search.get('page')}`, `page=1`)}`}>
+      onclick={handleLink}
+      class="w-10 h-10 flex items-center justify-center rounded-xl text-sm font-bold transition-all duration-300 {search.get('page') === '1' ? 'bg-indigo-600 text-white' : 'text-slate-400 hover:bg-white/10'}"
+      href={`${$linkPrefix}${$page.url.pathname}?${(() => {
+        const p = new URLSearchParams(search);
+        p.set('page', '1');
+        return p.toString();
+      })()}`}>
       1
     </a>
+
     {#if arr.length > 0 && arr[0] > 2}
-      <button class="join-item btn btn-disabled">...</button>
+      <span class="text-slate-600 px-1">...</span>
     {/if}
+
     {#each arr as p (p)}
       <a
-        on:click|preventDefault={handleLink}
-        class="join-item btn"
-        class:btn-disabled={search.get('page') === `${p}`}
-        href={`${$linkPrefix}${$page.url.pathname}?${search
-          .toString()
-          .replace(`page=${search.get('page')}`, `page=${p}`)}`}>
+        onclick={handleLink}
+        class="w-10 h-10 flex items-center justify-center rounded-xl text-sm font-bold transition-all duration-300 {search.get('page') === `${p}` ? 'bg-indigo-600 text-white' : 'text-slate-400 hover:bg-white/10'}"
+        href={`${$linkPrefix}${$page.url.pathname}?${(() => {
+          const params = new URLSearchParams(search);
+          params.set('page', p.toString());
+          return params.toString();
+        })()}`}>
         {p}
       </a>
     {/each}
+
     {#if arr.length > 0 && arr[arr.length - 1] < pages - 1}
-      <button class="join-item btn btn-disabled">...</button>
+      <span class="text-slate-600 px-1">...</span>
     {/if}
+
     {#if pages > 1}
       <a
-        on:click|preventDefault={handleLink}
-        class="join-item btn"
-        class:btn-disabled={search.get('page') === `${pages}`}
-        href={`${$linkPrefix}${$page.url.pathname}?${search
-          .toString()
-          .replace(`page=${search.get('page')}`, `page=${pages}`)}`}>
+        onclick={handleLink}
+        class="w-10 h-10 flex items-center justify-center rounded-xl text-sm font-bold transition-all duration-300 {search.get('page') === `${pages}` ? 'bg-indigo-600 text-white' : 'text-slate-400 hover:bg-white/10'}"
+        href={`${$linkPrefix}${$page.url.pathname}?${(() => {
+          const p = new URLSearchParams(search);
+          p.set('page', pages.toString());
+          return p.toString();
+        })()}`}>
         {pages}
       </a>
     {/if}

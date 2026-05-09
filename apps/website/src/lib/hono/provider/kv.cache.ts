@@ -11,7 +11,7 @@ export class KVProvider implements ICacheService {
     this.#kv = kv;
   }
 
-  async put<T>(key: string, value: T, expire?: number = 0): Promise<void> {
+  async put<T>(key: string, value: T, expire: number = 0): Promise<void> {
     startTime(this.#c, 'cache-put');
     await this.#kv.put(key, JSON.stringify(value), { expirationTtl: expire });
     endTime(this.#c, 'cache-put');

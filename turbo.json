@@ -1,15 +1,13 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "globalDotEnv": [".env.local", ".env", ".dev.vars"],
-  "pipeline": {
+  "tasks": {
     "build": {
       "dependsOn": ["^build"],
       "outputs": ["dist/**", ".svelte-kit/**"]
     },
     "test": {
       "outputs": [".coverage/**"],
-      "inputs": ["src/**/*.tsx", "src/**/*.ts", "test/**/*.ts"],
-      "outputMode": "full"
+      "inputs": ["src/**/*.tsx", "src/**/*.ts", "test/**/*.ts"]
     },
     "lint": {},
     "dev": {

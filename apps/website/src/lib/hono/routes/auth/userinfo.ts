@@ -14,6 +14,8 @@ router.get(
   async (c) => {
     const s = c.get('services');
     const viewer = c.get('viewer');
+    if (!viewer) return c.json({ error: 'unauthorized' }, 401);
+
     const u = await s.user.getUserById(viewer.id);
     const thirdparty = await s.user.getThirdUsersByUserId(viewer.id);
     return c.json({ ...u, thirdparty });

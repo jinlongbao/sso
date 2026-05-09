@@ -24,7 +24,9 @@ export const dict: I18nDict = {
     unban: '激活登录',
     thirdparty: '登录方式',
     bind: '绑定',
-    unbind: '解绑'
+    unbind: '解绑',
+    logged_in_as: '登录身份',
+    profile: '个人设置'
   },
   app: {
     management: '应用管理',
@@ -35,6 +37,7 @@ export const dict: I18nDict = {
     logo: 'Logo',
     name: '应用名称',
     description: '应用介绍',
+    no_description: '该应用暂无描述信息。',
     secret: 'clientSecret',
     redirect_uris: '回调连接',
     production: '是否发布',
@@ -57,6 +60,14 @@ export const dict: I18nDict = {
     login: '登录',
     logout: '退出',
     adblock: '发现广告拦截插件',
-    adblock_message: '请关闭广告拦截插件以继续使用本站服务。'
+    adblock_message: '请关闭广告拦截插件以继续使用本站服务。',
+    welcome_back: '欢迎回来',
+    dashboard: '控制台'
+  },
+  dashboard: {
+    subtitle: '在这里管理您的应用、账户和偏好设置',
+    my_apps: '我的应用',
+    no_apps: '暂无可用的应用',
+    no_apps_hint: '应用将会在审核通过后显示在这里，或者您可以联系管理员进行创建。'
   }
 };

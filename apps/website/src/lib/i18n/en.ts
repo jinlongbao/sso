@@ -24,20 +24,23 @@ export const dict: I18nDict = {
     unban: 'Active',
     thirdparty: 'Third Party Login',
     bind: 'Bind',
-    unbind: 'Unbind'
+    unbind: 'Unbind',
+    logged_in_as: 'Logged in as',
+    profile: 'Profile'
   },
   app: {
     management: 'App Management',
     create: 'Create App',
     edit: 'Edit App',
     create_secret: 'Create Client Secret',
-    id: 'clientId',
+    id: 'ClientId',
     logo: 'Logo',
     name: 'App Name',
     description: 'Description',
-    secret: 'clientSecret',
-    redirect_uris: 'redirectUris',
-    production: 'Is Production',
+    no_description: 'No description provided for this app.',
+    secret: 'ClientSecret',
+    redirect_uris: 'Redirect Uris',
+    production: 'Production',
     homepage: 'Homepage'
   },
   common: {
@@ -51,12 +54,20 @@ export const dict: I18nDict = {
     confirm_logout: 'Are you sure to logout?',
     vip: 'Upgrade/Renew VIP',
     profile: 'Profile',
-    created_at: 'Created Time',
-    updated_at: 'Updated Time',
-    go_back: 'Go back',
+    created_at: 'Created At',
+    updated_at: 'Updated At',
+    go_back: 'Go Back',
     login: 'Login',
     logout: 'Logout',
-    adblock: 'Adblock Detected',
-    adblock_message: 'Please disable adblock to continue using this site.'
+    adblock: 'AdBlock Detected',
+    adblock_message: 'Please disable AdBlock to continue using our service.',
+    welcome_back: 'Welcome back',
+    dashboard: 'Dashboard'
+  },
+  dashboard: {
+    subtitle: 'Manage your applications, accounts, and preferences here',
+    my_apps: 'My Applications',
+    no_apps: 'No applications available',
+    no_apps_hint: 'Applications will appear here after approval, or you can contact an administrator to create one.'
   }
 };

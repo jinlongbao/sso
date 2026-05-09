@@ -4,7 +4,14 @@ import { callbackOrBindRedirect } from '../../utils/safe-redirect';
 
 const router = new Hono();
 
-router.use('/afdian/*', afdianAuth());
+router.use('/afdian/*', async (c, next) => {
+  const handler = afdianAuth({
+    client_id: c.env.AFDIAN_CLIENT_ID,
+    client_secret: c.env.AFDIAN_CLIENT_SECRET,
+    redirect_uri: c.env.AFDIAN_CALLBACK_URL
+  });
+  return handler(c, next);
+});
 router.get('/afdian/*', async (c) => {
   const s = c.get('services');
   let viewer = s.session.get('user');

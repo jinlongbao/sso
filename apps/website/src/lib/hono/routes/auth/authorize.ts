@@ -39,6 +39,8 @@ router.get(
     if (!user) {
       search.append('client_id', client_id);
       search.append('redirect_uri', redirect_uri);
+      const returnTo = `/auth/authorize?${search.toString()}`;
+      c.header('Set-Cookie', `returnTo=${returnTo}; Path=/; HttpOnly; SameSite=Lax`);
       return c.redirect(`/login?${search.toString()}`);
     }
     // callback with code

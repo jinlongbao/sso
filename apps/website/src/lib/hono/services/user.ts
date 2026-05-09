@@ -102,6 +102,10 @@ export class UserService implements IUserService {
   ): Promise<User> {
     const userId = nanoid(10);
     try {
+      const total = await this.#db.query<{ total: number }>(
+        'SELECT COUNT(*) AS total FROM user',
+        []
+      );
       await this.#db.execute(
         'INSERT INTO user (id, username, display_name, avatar, type) VALUES (?1, ?2, ?3, ?4, ?5)',
         [
@@ -109,7 +113,7 @@ export class UserService implements IUserService {
           thirdUser.username,
           thirdUser.display_name,
           thirdUser.photos?.[0].value,
-          UserType.User
+          total[0].total === 0 ? UserType.Admin : UserType.User
         ]
       );
     } catch (e) {

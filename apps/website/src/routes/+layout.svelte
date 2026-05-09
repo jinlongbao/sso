@@ -1,6 +1,6 @@
 <script>
   import '../app.css';
-  // import { t } from '@svelte-dev/i18n';
+  import { t } from '@svelte-dev/i18n';
   import SEO from '$lib/components/SEO.svelte';
   import Navbar from '$lib/components/Navbar.svelte';
   import { onNavigate } from '$app/navigation';
@@ -23,40 +23,23 @@
 <SEO />
 
 <div id="background"></div>
-<Navbar />
 
-<main
-  class="w-[720px] max-w-full mx-auto shadow bg-neutral/90 text-neutral-content p-2 sm:p-4 mb-20">
-  <slot />
+<div class="flex flex-col min-h-screen">
+  <Navbar />
 
-  <Bootstrap />
-</main>
+  <main class="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="max-w-5xl mx-auto">
+      <slot />
+    </div>
+  </main>
 
-<footer class="text-center text-sm mt-4">
-  <p>
-    <a
-      href="https://github.com/willin"
-      target="_blank"
-      class="inline-block"
-      rel="noreferrer">
-      <img
-        src="https://img.shields.io/github/followers/willin.svg?style=social&amp;label=Followers"
-        alt="Github Followers" />
-    </a>{' '}
-    <a
-      href="https://github.com/willin/sso"
-      target="_blank"
-      class="inline-block"
-      rel="noreferrer">
-      <img
-        alt="GitHub Repo stars"
-        src="https://img.shields.io/github/stars/willin/sso?style=social" />
-    </a>
-  </p>
-  <p>
-    &copy;{' '}
-    <a href="https://willin.wang" target="_blank" rel="noreferrer">
-      Willin Wang
-    </a>
-  </p>
-</footer>
+  <footer class="py-12 border-t border-white/5 mt-auto">
+    <div class="container mx-auto px-4 flex justify-center items-center">
+      <div class="text-slate-500 text-sm">
+        &copy; {new Date().getFullYear()} Willin SSO
+      </div>
+    </div>
+  </footer>
+</div>
+
+<Bootstrap />

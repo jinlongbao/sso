@@ -26,16 +26,18 @@
     "@commitlint/config-conventional": "^18.4.3",
     "@hono/eslint-config": "^0.0.3",
     "@svelte-dev/eslint-config": "^1.0.0",
+    "@sveltejs/kit": "^2.59.1",
     "bun-types": "^1.0.20",
     "eslint": "^8.54.0",
-    "hono": "^3.11.10",
+    "hono": "^4.12.18",
     "husky": "^8.0.3",
     "lint-staged": "^15.2.0",
     "prettier": "^3.1.0",
     "prettier-plugin-svelte": "^3.1.2",
-    "turbo": "^1.11.2",
+    "turbo": "^2.9.11",
     "typescript": "^5.3.3",
-    "wrangler": "^3.22.1"
+    "vite": "^8.0.11",
+    "wrangler": "^4.90.0"
   },
   "engines": {
     "node": ">=18"
